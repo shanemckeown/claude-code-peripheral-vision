@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ╔══════════════════════════════════════════════════════════════════════╗
-# ║  Claude Code Peripheral Vision (/pv)                               ║
+# ║  claude-code-observer — Peripheral Vision for Claude Code          ║
 # ║                                                                    ║
 # ║  Captures "drive-by observations" — bugs, misconfigs, and code     ║
 # ║  smells noticed during AI coding but outside the current task.     ║

@@ -1,4 +1,4 @@
-# claude-code-observer
+# Claude Code Peripheral Vision
 
 Peripheral vision for Claude Code. Captures bugs, misconfigs, and code smells that Claude notices during coding but aren't part of the current task. Without this, they vanish.
 
@@ -50,7 +50,7 @@ Each entry is tagged with timestamp, branch, and source:
 ```bash
 mkdir -p ~/.claude/hooks
 curl -o ~/.claude/hooks/observer.sh \
-  https://raw.githubusercontent.com/shanemckeown/claude-code-observer/main/observer.sh
+  https://raw.githubusercontent.com/shanemckeown/claude-code-peripheral-vision/main/observer.sh
 chmod +x ~/.claude/hooks/observer.sh
 ```
 

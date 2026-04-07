@@ -1,4 +1,4 @@
-# claude-code-observer — Design Notes
+# Claude Code Peripheral Vision — Design Notes
 
 ## The Problem
 
