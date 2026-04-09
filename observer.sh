@@ -133,12 +133,16 @@ echo \"- [\$(date +\"%Y-%m-%d %H:%M\")] (\$(git branch --show-current 2>/dev/nul
       # Require substantive content after the keyword (.{10,})
       FINDINGS=$(echo "$RESPONSE" \
         | grep -iE '(deprecat.{10,}|warning:.{10,}|WARN[^I].{10,}|[0-9]+ vulnerabilit)' \
-        | grep -viE '(node_modules/|peer dep|npm warn config|ExperimentalWarning|punycode|Validation Warning:$|^[0-9a-f]{7,}|^[+-] )' \
+        | grep -viE '(node_modules/|peer dep|npm warn config|ExperimentalWarning|punycode|Validation Warning:$|^[0-9a-f]{7,}|^[+-] |\.warn\(|warn:[[:space:]]*jest)' \
         | head -5 \
         || true)
 
       if [ -n "$FINDINGS" ]; then
-        HASH=$(md5_hash "$FINDINGS")
+        # Normalize timestamped log paths before hashing so repeated runs of
+        # the same underlying error collapse to one entry (e.g. gcloud daily
+        # log path: /.../logs/2026.04.07/14.14.26.329737.log).
+        NORMALIZED=$(echo "$FINDINGS" | sed -E 's|/[0-9]{4}\.[0-9]{2}\.[0-9]{2}/[0-9.]+\.log|/TS|g')
+        HASH=$(md5_hash "$NORMALIZED")
 
         if ! is_seen "$HASH"; then
           mark_seen "$HASH"
